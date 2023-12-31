@@ -8,12 +8,13 @@
     android:columnCount="4">
 
     <FrameLayout
-        android:layout_height="145dp"
+        android:layout_height="185dp"
         android:layout_columnSpan="4">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="115dp"
+            android:layout_gravity="center_horizontal|bottom"
             android:background="@drawable/tinycornercat"
             android:scaleType="centerCrop" />
 
