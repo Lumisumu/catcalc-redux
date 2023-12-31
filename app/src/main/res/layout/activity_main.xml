@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:rowCount="9"
+    android:columnCount="4">
+
+    <FrameLayout
+        android:layout_height="145dp"
+        android:layout_columnSpan="4">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/tinycornercat"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/resultscreen"
+            style="@style/inputview_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
+
+    <Button
+        style="@style/darkbutton_style"
+        android:id="@+id/slashbutton"
+        android:text="/"
+        />
+
+    <Button
+        style="@style/darkbutton_style"
+        android:id="@+id/multipbutton"
+        android:text="*"
+        />
+
+    <Button
+        style="@style/darkbutton_style"
+        android:id="@+id/minusbutton"
+        android:text="-"
+        />
+
+    <Button
+        style="@style/darkbutton_style"
+        android:id="@+id/plusbutton"
+        android:text="+"
+        />
+
+    <Button
+        style="@style/lightbutton_style"
+        android:id="@+id/sevenbutton"
+        android:text="7"
+        />
+
+    <Button
+        style="@style/lightbutton_style"
+        android:id="@+id/eightbutton"
+        android:text="8"
+        />
+
+    <Button
+        style="@style/lightbutton_style"
+        android:id="@+id/ninebutton"
+        android:text="9"
+        />
+
+    <Button
+        style="@style/deletebutton_style"
+        android:id="@+id/backbutton"
+        android:text="◁"
+        />
+
+    <Button
+        style="@style/lightbutton_style"
+        android:id="@+id/fourbutton"
+        android:text="4"
+        />
+
+    <Button
+        style="@style/lightbutton_style"
+        android:id="@+id/fivebutton"
+        android:text="5"
+        />
+
+    <Button
+        style="@style/lightbutton_style"
+        android:id="@+id/sixbutton"
+        android:text="6"
+        />
+
+    <Button
+        style="@style/deletebutton_style"
+        android:id="@+id/clearbutton"
+        android:text="C"
+        />
+
+    <Button
+        style="@style/lightbutton_style"
+        android:id="@+id/onebutton"
+        android:text="1"
+        />
+
+    <Button
+        style="@style/lightbutton_style"
+        android:id="@+id/twobutton"
+        android:text="2"
+        />
+
+    <Button
+        style="@style/lightbutton_style"
+        android:id="@+id/threebutton"
+        android:text="3"
+        />
+
+    <Button
+        style="@style/confirmbutton_style"
+        android:id="@+id/equalbutton"
+        android:text="="
+        />
+
+    <Button
+        style="@style/lightbutton_style"
+        android:id="@+id/zerobutton"
+        android:text="0"
+        android:layout_columnSpan="2"
+        />
+
+    <Button
+        style="@style/darkbutton_style"
+        android:id="@+id/pointbutton"
+        android:text="."
+        />
+</GridLayout>
