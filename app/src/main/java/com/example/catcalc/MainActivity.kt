@@ -65,7 +65,8 @@ class MainActivity : AppCompatActivity() {
         if (resultscreen.text != "") {
             val str = resultscreen.text.toString()
             val result = DoubleEvaluator().evaluate(str)
-            resultscreen.text = result.toString()
+            val editedResult = String.format("%.3f", result)
+            resultscreen.text = editedResult.toString()
             resultsOnScreen = true
         }
     }
