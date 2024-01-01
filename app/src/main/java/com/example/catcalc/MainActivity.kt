@@ -2,9 +2,11 @@ package com.example.catcalc
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.fathzer.soft.javaluator.DoubleEvaluator
 import androidx.appcompat.app.AppCompatActivity
 
@@ -12,27 +14,36 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
 
     private var resultsOnScreen = true
+    private var errorOnScreen = false
 
     private fun removeLastChar(resultscreen: TextView) {
-        resultscreen.text = resultscreen.text.dropLast(1)
-        if(resultsOnScreen) {
-            resultsOnScreen = false
+        if(errorOnScreen) {
+            resultscreen.text = ""
+            errorOnScreen = false
         }
+        else {
+            resultscreen.text = resultscreen.text.dropLast(1)
+        }
+        resultsOnScreen = false
     }
 
     private fun clearResultScreen(resultscreen: TextView) {
         resultscreen.text = ""
-        if(resultsOnScreen) {
-            resultsOnScreen = false
-        }
+        resultsOnScreen = false
+        errorOnScreen = false
     }
 
     @SuppressLint("SetTextI18n")
     fun addSymbol(resultscreen: TextView, operator: String) {
 
+        if(errorOnScreen) {
+            resultscreen.text = ""
+            errorOnScreen = false
+        }
+
         //If field is empty
         if(resultscreen.text == "") {
-            if (operator == "/" || operator == "*" || operator == "+") {
+            if(operator == "/" || operator == "*" || operator == "+") {
                 resultscreen.text = ""
             }
             else {
@@ -42,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         //If field has previous result
         else if(resultsOnScreen && resultscreen.text != "") {
-            if (operator != "/" && operator != "*" && operator != "+" && operator != "-") {
+            if(operator != "/" && operator != "*" && operator != "+" && operator != "-") {
                 resultscreen.text = operator
             }
             else {
@@ -63,13 +74,20 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     fun getResults(resultscreen: TextView) {
         val lastCharIsOperator = resultscreen.text.endsWith("/") || resultscreen.text.endsWith("*") || resultscreen.text.endsWith("-") || resultscreen.text.endsWith("+")
-        if (resultscreen.text != "" && !lastCharIsOperator) {
+        if(resultscreen.text != "" && !lastCharIsOperator) {
             val str = resultscreen.text.toString()
-            var result = DoubleEvaluator().evaluate(str)
-            var editedResult = String.format("%.3f", result)
-            editedResult = editedResult.replace(",", ".")
-            resultscreen.text = editedResult
-            resultsOnScreen = true
+
+            try {
+                var result = DoubleEvaluator().evaluate(str)
+                var editedResult = String.format("%.3f", result)
+                editedResult = editedResult.replace(",", ".")
+                resultscreen.text = editedResult
+                resultsOnScreen = true
+            } catch (e: Exception) {
+                Toast.makeText(this, "Check equation for mistakes", Toast.LENGTH_LONG).show()
+                resultscreen.text = "Cannot calculate: " + str
+                errorOnScreen = true
+            }
         }
     }
 
