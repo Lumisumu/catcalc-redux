@@ -11,17 +11,53 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
+    var resultsOnScreen = true
+
     fun removeLastChar(resultscreen: TextView) {
         resultscreen.text = resultscreen.text.dropLast(1)
+        if(resultsOnScreen == true) {
+            resultsOnScreen = false
+        }
     }
 
     fun clearResultScreen(resultscreen: TextView) {
         resultscreen.text = ""
+        if(resultsOnScreen == true) {
+            resultsOnScreen = false
+        }
     }
 
     @SuppressLint("SetTextI18n")
     fun addSymbol(resultscreen: TextView, operator: String) {
-        resultscreen.text = resultscreen.text.toString() + operator
+
+        //If field is empty
+        if(resultscreen.text == "") {
+            if (operator == "/" || operator == "*" || operator == "+") {
+                resultscreen.text = ""
+            }
+            else {
+                resultscreen.text = operator
+            }
+        }
+
+        //If field has previous result
+        else if(resultsOnScreen == true && resultscreen.text != "") {
+            if (operator != "/" && operator != "*" && operator != "+" && operator != "-") {
+                resultscreen.text = operator
+            }
+            else {
+                resultscreen.text = resultscreen.text.toString() + operator
+            }
+        }
+
+        //Continue writing equation
+        else {
+            resultscreen.text = resultscreen.text.toString() + operator
+        }
+
+        if(resultsOnScreen == true) {
+            resultsOnScreen = false
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -30,6 +66,7 @@ class MainActivity : AppCompatActivity() {
             val str = resultscreen.text.toString()
             val result = DoubleEvaluator().evaluate(str)
             resultscreen.text = result.toString()
+            resultsOnScreen = true
         }
     }
 
