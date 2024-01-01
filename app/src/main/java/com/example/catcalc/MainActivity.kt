@@ -26,9 +26,11 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun getResults(resultscreen: TextView) {
-        val str = resultscreen.text.toString()
-        val result = DoubleEvaluator().evaluate(str)
-        resultscreen.text = result.toString()
+        if (resultscreen.text != "") {
+            val str = resultscreen.text.toString()
+            val result = DoubleEvaluator().evaluate(str)
+            resultscreen.text = result.toString()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

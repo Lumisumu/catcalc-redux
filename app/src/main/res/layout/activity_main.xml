@@ -22,7 +22,8 @@
             android:id="@+id/resultscreen"
             style="@style/inputview_style"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" />
 
     </FrameLayout>
 
