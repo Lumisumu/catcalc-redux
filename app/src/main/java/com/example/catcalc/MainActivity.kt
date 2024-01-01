@@ -62,7 +62,8 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun getResults(resultscreen: TextView) {
-        if (resultscreen.text != "") {
+        val lastCharIsOperator = resultscreen.text.endsWith("/") || resultscreen.text.endsWith("*") || resultscreen.text.endsWith("-") || resultscreen.text.endsWith("+")
+        if (resultscreen.text != "" && !lastCharIsOperator) {
             val str = resultscreen.text.toString()
             var result = DoubleEvaluator().evaluate(str)
             var editedResult = String.format("%.3f", result)
