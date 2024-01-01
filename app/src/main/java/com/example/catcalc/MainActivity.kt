@@ -11,18 +11,18 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    var resultsOnScreen = true
+    private var resultsOnScreen = true
 
-    fun removeLastChar(resultscreen: TextView) {
+    private fun removeLastChar(resultscreen: TextView) {
         resultscreen.text = resultscreen.text.dropLast(1)
-        if(resultsOnScreen == true) {
+        if(resultsOnScreen) {
             resultsOnScreen = false
         }
     }
 
-    fun clearResultScreen(resultscreen: TextView) {
+    private fun clearResultScreen(resultscreen: TextView) {
         resultscreen.text = ""
-        if(resultsOnScreen == true) {
+        if(resultsOnScreen) {
             resultsOnScreen = false
         }
     }
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         //If field has previous result
-        else if(resultsOnScreen == true && resultscreen.text != "") {
+        else if(resultsOnScreen && resultscreen.text != "") {
             if (operator != "/" && operator != "*" && operator != "+" && operator != "-") {
                 resultscreen.text = operator
             }
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             resultscreen.text = resultscreen.text.toString() + operator
         }
 
-        if(resultsOnScreen == true) {
+        if(resultsOnScreen) {
             resultsOnScreen = false
         }
     }
@@ -64,9 +64,10 @@ class MainActivity : AppCompatActivity() {
     fun getResults(resultscreen: TextView) {
         if (resultscreen.text != "") {
             val str = resultscreen.text.toString()
-            val result = DoubleEvaluator().evaluate(str)
-            val editedResult = String.format("%.3f", result)
-            resultscreen.text = editedResult.toString()
+            var result = DoubleEvaluator().evaluate(str)
+            var editedResult = String.format("%.3f", result)
+            editedResult = editedResult.replace(",", ".")
+            resultscreen.text = editedResult
             resultsOnScreen = true
         }
     }
@@ -98,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         val clearbutton = findViewById<Button>(R.id.clearbutton)
 
 
-        //OPERATOR ON CLICK
+        //ON CLICK
 
         slashbutton.setOnClickListener(View.OnClickListener {
             addSymbol(resultscreen, "/")
@@ -117,14 +118,12 @@ class MainActivity : AppCompatActivity() {
         })
 
         equalbutton.setOnClickListener(View.OnClickListener {
-            //addSymbol(resultscreen, "=")
             getResults(resultscreen)
         })
 
         pointbutton.setOnClickListener(View.OnClickListener {
             addSymbol(resultscreen, ".")
         })
-
 
         //OTHER BUTTONS
         backbutton.setOnClickListener(View.OnClickListener {
@@ -141,7 +140,7 @@ class MainActivity : AppCompatActivity() {
         })
 
        twobutton.setOnClickListener(View.OnClickListener {
-           addSymbol(resultscreen, "2")
+            addSymbol(resultscreen, "2")
         })
 
         threebutton.setOnClickListener(View.OnClickListener {

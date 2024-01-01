@@ -33,42 +33,16 @@
         <item name="android:onClick">onClick</item>
     </style>
 
-    <style name="darkbutton_style">
+    <style name="calculatebutton_style">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
         <item name="android:layout_rowWeight">1</item>
         <item name="android:layout_columnWeight">1</item>
-        <item name="android:gravity">fill</item>
-        <item name="android:textSize">35sp</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:background">#B3B3CC</item>
-        <item name="android:layout_margin">1dp</item>
-        <item name="android:onClick">onClick</item>
-    </style>
-
-    <style name="confirmbutton_style">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">0dp</item>
         <item name="android:layout_rowSpan">2</item>
-        <item name="android:layout_rowWeight">1</item>
-        <item name="android:layout_columnWeight">1</item>
         <item name="android:gravity">fill</item>
         <item name="android:textSize">35sp</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:background">#5F7DAF</item>
-        <item name="android:layout_margin">1dp</item>
-        <item name="android:onClick">onClick</item>
-    </style>
-
-    <style name="deletebutton_style">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">0dp</item>
-        <item name="android:layout_rowWeight">1</item>
-        <item name="android:layout_columnWeight">1</item>
-        <item name="android:gravity">fill</item>
-        <item name="android:textSize">35sp</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:background">#E2C3C8</item>
+        <item name="android:background">#F7DFD3</item>
         <item name="android:layout_margin">1dp</item>
         <item name="android:onClick">onClick</item>
     </style>

@@ -28,25 +28,25 @@
     </FrameLayout>
 
     <Button
-        style="@style/darkbutton_style"
+        style="@style/lightbutton_style"
         android:id="@+id/slashbutton"
         android:text="/"
         />
 
     <Button
-        style="@style/darkbutton_style"
+        style="@style/lightbutton_style"
         android:id="@+id/multipbutton"
         android:text="*"
         />
 
     <Button
-        style="@style/darkbutton_style"
+        style="@style/lightbutton_style"
         android:id="@+id/minusbutton"
         android:text="-"
         />
 
     <Button
-        style="@style/darkbutton_style"
+        style="@style/lightbutton_style"
         android:id="@+id/plusbutton"
         android:text="+"
         />
@@ -70,7 +70,7 @@
         />
 
     <Button
-        style="@style/deletebutton_style"
+        style="@style/lightbutton_style"
         android:id="@+id/backbutton"
         android:text="◁"
         />
@@ -94,7 +94,7 @@
         />
 
     <Button
-        style="@style/deletebutton_style"
+        style="@style/lightbutton_style"
         android:id="@+id/clearbutton"
         android:text="C"
         />
@@ -118,7 +118,7 @@
         />
 
     <Button
-        style="@style/confirmbutton_style"
+        style="@style/calculatebutton_style"
         android:id="@+id/equalbutton"
         android:text="="
         />
@@ -131,7 +131,7 @@
         />
 
     <Button
-        style="@style/darkbutton_style"
+        style="@style/lightbutton_style"
         android:id="@+id/pointbutton"
         android:text="."
         />
