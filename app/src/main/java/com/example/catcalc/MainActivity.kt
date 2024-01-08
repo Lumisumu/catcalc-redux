@@ -19,7 +19,9 @@ class MainActivity : AppCompatActivity() {
     private fun removeLastChar(resultscreen: TextView) {
         if(errorOnScreen) {
             resultscreen.text = ""
-            errorOnScreen = false
+        }
+        else if(resultsOnScreen) {
+            resultscreen.text = ""
         }
         else {
             resultscreen.text = resultscreen.text.dropLast(1)
@@ -79,8 +81,20 @@ class MainActivity : AppCompatActivity() {
 
             try {
                 var result = DoubleEvaluator().evaluate(str)
+
+                //Strip decimal amount to three
                 var editedResult = String.format("%.3f", result)
+
                 editedResult = editedResult.replace(",", ".")
+
+                while(editedResult.last().toString() == "0") {
+                    editedResult = editedResult.dropLast(1)
+                }
+
+                if(editedResult.last().toString() == ".") {
+                    editedResult = editedResult.dropLast(1)
+                }
+
                 resultscreen.text = editedResult
                 resultsOnScreen = true
             } catch (e: Exception) {
@@ -94,104 +108,35 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //Results screen textview
         val resultscreen = findViewById<TextView>(R.id.resultscreen)
         resultscreen.text = ""
 
-        //Buttons
-        val onebutton = findViewById<Button>(R.id.onebutton)
-        val twobutton = findViewById<Button>(R.id.twobutton)
-        val threebutton = findViewById<Button>(R.id.threebutton)
-        val fourbutton = findViewById<Button>(R.id.fourbutton)
-        val fivebutton = findViewById<Button>(R.id.fivebutton)
-        val sixbutton = findViewById<Button>(R.id.sixbutton)
-        val sevenbutton = findViewById<Button>(R.id.sevenbutton)
-        val eightbutton = findViewById<Button>(R.id.eightbutton)
-        val ninebutton = findViewById<Button>(R.id.ninebutton)
-        val zerobutton = findViewById<Button>(R.id.zerobutton)
-        val slashbutton = findViewById<Button>(R.id.slashbutton)
-        val multipbutton = findViewById<Button>(R.id.multipbutton)
-        val minusbutton = findViewById<Button>(R.id.minusbutton)
-        val plusbutton = findViewById<Button>(R.id.plusbutton)
+        //Number and operator buttons
+        val calculatorButtons = arrayOf(R.id.onebutton, R.id.twobutton, R.id.threebutton, R.id.fourbutton, R.id.fivebutton, R.id.sixbutton, R.id.sevenbutton, R.id.eightbutton, R.id.ninebutton, R.id.zerobutton, R.id.slashbutton, R.id.multipbutton, R.id.minusbutton, R.id.plusbutton, R.id.pointbutton)
+
+        for(i in calculatorButtons) {
+            var button = findViewById<Button>(i)
+            button.setOnClickListener(View.OnClickListener {
+                addSymbol(resultscreen, button.text.toString())
+            })
+        }
+
+        //Other buttons
         val equalbutton = findViewById<Button>(R.id.equalbutton)
-        val pointbutton = findViewById<Button>(R.id.pointbutton)
-        val backbutton = findViewById<Button>(R.id.backbutton)
-        val clearbutton = findViewById<Button>(R.id.clearbutton)
-
-
-        //ON CLICK
-
-        slashbutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, "/")
-        })
-
-        multipbutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, "*")
-        })
-
-        minusbutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, "-")
-        })
-
-        plusbutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, "+")
-        })
-
         equalbutton.setOnClickListener(View.OnClickListener {
             getResults(resultscreen)
         })
 
-        pointbutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, ".")
-        })
-
-        //OTHER BUTTONS
+        val backbutton = findViewById<Button>(R.id.backbutton)
         backbutton.setOnClickListener(View.OnClickListener {
             removeLastChar(resultscreen)
         })
 
+        val clearbutton = findViewById<Button>(R.id.clearbutton)
         clearbutton.setOnClickListener(View.OnClickListener {
             clearResultScreen(resultscreen)
-        })
-
-        //NUMBER ON CLICK
-        onebutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, "1")
-        })
-
-       twobutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, "2")
-        })
-
-        threebutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, "3")
-        })
-
-        fourbutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, "4")
-        })
-
-        fivebutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, "5")
-        })
-
-        sixbutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, "6")
-        })
-
-        sevenbutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, "7")
-        })
-
-        eightbutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, "8")
-        })
-
-        ninebutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, "9")
-        })
-
-        zerobutton.setOnClickListener(View.OnClickListener {
-            addSymbol(resultscreen, "0")
         })
     }
 }
