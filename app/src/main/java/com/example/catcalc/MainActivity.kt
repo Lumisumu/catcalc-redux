@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         //If field is empty
         if(resultscreen.text == "") {
-            if(operator == "/" || operator == "*" || operator == "+") {
+            if(operator == "÷" || operator == "x" || operator == "+") {
                 resultscreen.text = ""
             }
             else {
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
         //If field has previous result
         else if(resultsOnScreen && resultscreen.text != "") {
-            if(operator != "/" && operator != "*" && operator != "+" && operator != "-") {
+            if(operator != "÷"  && operator != "x" && operator != "+" && operator != "-") {
                 resultscreen.text = operator
             }
             else {
@@ -77,13 +77,16 @@ class MainActivity : AppCompatActivity() {
     fun getResults(resultscreen: TextView) {
         val lastCharIsOperator = resultscreen.text.endsWith("/") || resultscreen.text.endsWith("*") || resultscreen.text.endsWith("-") || resultscreen.text.endsWith("+")
         if(resultscreen.text != "" && !lastCharIsOperator) {
-            val str = resultscreen.text.toString()
+            var str = resultscreen.text.toString()
+
+            str = str.replace("x", "*")
+            str = str.replace("÷", "/")
 
             try {
                 var result = DoubleEvaluator().evaluate(str)
 
                 //Strip decimal amount to three
-                var editedResult = String.format("%.3f", result)
+                var editedResult = String.format("%.5f", result)
 
                 editedResult = editedResult.replace(",", ".")
 
