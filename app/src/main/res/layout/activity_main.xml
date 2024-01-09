@@ -72,7 +72,7 @@
     <Button
         style="@style/lightbutton_style"
         android:id="@+id/backbutton"
-        android:text="←"
+        android:text="◁"
         />
 
     <Button
