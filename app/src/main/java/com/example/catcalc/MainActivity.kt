@@ -13,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
+    //Flag to mark if textview has a result
     private var resultsOnScreen = true
+    //Flag to mark if textview has an error message
     private var errorOnScreen = false
 
     private fun removeLastChar(resultscreen: TextView) {
@@ -73,31 +75,40 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //When equals button is pressed
     @SuppressLint("SetTextI18n")
     fun getResults(resultscreen: TextView) {
+        //Check if last char is operator
         val lastCharIsOperator = resultscreen.text.endsWith("/") || resultscreen.text.endsWith("*") || resultscreen.text.endsWith("-") || resultscreen.text.endsWith("+")
+
         if(resultscreen.text != "" && !lastCharIsOperator) {
             var str = resultscreen.text.toString()
 
+            //Replace operators, evaluate function results in error if "x" or "÷" is used
             str = str.replace("x", "*")
             str = str.replace("÷", "/")
 
             try {
+                //Get equation result
                 var result = DoubleEvaluator().evaluate(str)
 
                 //Strip decimal amount to three
                 var editedResult = String.format("%.5f", result)
 
+                //Replace decimal symbol with point
                 editedResult = editedResult.replace(",", ".")
 
+                //Remove extra "0"s from the end of the result
                 while(editedResult.last().toString() == "0") {
                     editedResult = editedResult.dropLast(1)
                 }
 
+                //If result does not have decimals, remove point symbol
                 if(editedResult.last().toString() == ".") {
                     editedResult = editedResult.dropLast(1)
                 }
 
+                //Show result on screen
                 resultscreen.text = editedResult
                 resultsOnScreen = true
             } catch (e: Exception) {
@@ -108,6 +119,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //When application starts
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
