@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:rowCount="9"
-    android:columnCount="4">
+    android:columnCount="4"
+    >
 
     <FrameLayout
         android:layout_height="185dp"
@@ -16,15 +17,16 @@
             android:layout_height="91dp"
             android:layout_gravity="center_horizontal|bottom"
             android:background="@drawable/tinycornercat"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            />
 
         <TextView
             android:id="@+id/resultscreen"
             style="@style/inputview_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="right" />
-
+            android:layout_gravity="right"
+            />
     </FrameLayout>
 
     <Button
