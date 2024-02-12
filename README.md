@@ -5,3 +5,11 @@ My first Android Project, CatCalc from 2020, is now updated and rewritten so I c
 Created and built with Kotlin in Android Studio 2023.1.1
 
 Minimum Android version is 10.0 (SDK 29).
+
+## Percentage calculations
+
+Percentage calculations are now supported. Example:
+
+```
+20 - 20% = 16
+```
