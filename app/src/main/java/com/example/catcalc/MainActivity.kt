@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         //If field is empty
         if(resultscreen.text == "") {
-            if(operator == "÷" || operator == "x" || operator == "+") {
+            if(operator == "÷" || operator == "x" || operator == "+" || operator == "%") {
                 resultscreen.text = ""
             }
             else {
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         //If field has previous result
         else if(resultsOnScreen && resultscreen.text != "") {
-            if(operator != "÷"  && operator != "x" && operator != "+" && operator != "-") {
+            if(operator != "÷"  && operator != "x" && operator != "+" && operator != "-" && operator != "%") {
                 resultscreen.text = operator
             }
             else {
@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity() {
     //When equals button is pressed
     @SuppressLint("SetTextI18n")
     fun getResults(resultscreen: TextView) {
+        var result = 0.0
         //Check if last char is operator
         val lastCharIsOperator = resultscreen.text.endsWith("/") || resultscreen.text.endsWith("*") || resultscreen.text.endsWith("-") || resultscreen.text.endsWith("+")
 
@@ -89,8 +90,37 @@ class MainActivity : AppCompatActivity() {
             str = str.replace("÷", "/")
 
             try {
-                //Get equation result
-                var result = DoubleEvaluator().evaluate(str)
+                //Percent equations
+                if(str.last().toString() == "%") {
+
+                    val percentOperator = when {
+                        str.contains("+") -> "+"
+                        str.contains("-") -> "-"
+                        str.contains("/") -> "/"
+                        str.contains("*") -> "*"
+                        else -> throw IllegalArgumentException("Invalid operator")
+                    }
+
+                    val firstNumber = str.substringBefore(percentOperator)
+                    val secondNumber = str.substringAfter(percentOperator, "").removeSuffix("%")
+
+                    var percent = firstNumber.toDouble() / 100
+                    var percentResult = percent * secondNumber.toDouble()
+
+                    result = when (percentOperator) {
+                        "+" -> firstNumber.toDouble() + percentResult
+                        "-" -> firstNumber.toDouble() - percentResult
+                        "/" -> firstNumber.toDouble() / percentResult
+                        "*" -> firstNumber.toDouble() * percentResult
+                        else -> throw IllegalArgumentException("Invalid operator")
+                    }
+                }
+
+                //Normal equations
+                else {
+                    //Get equation result
+                    result = DoubleEvaluator().evaluate(str)
+                }
 
                 //Strip decimal amount to three
                 var editedResult = String.format("%.5f", result)
@@ -111,6 +141,7 @@ class MainActivity : AppCompatActivity() {
                 //Show result on screen
                 resultscreen.text = editedResult
                 resultsOnScreen = true
+
             } catch (e: Exception) {
                 Toast.makeText(this, "Check equation for mistakes", Toast.LENGTH_LONG).show()
                 resultscreen.text = "Cannot calculate: " + str
@@ -129,7 +160,7 @@ class MainActivity : AppCompatActivity() {
         resultscreen.text = ""
 
         //Number and operator buttons
-        val calculatorButtons = arrayOf(R.id.onebutton, R.id.twobutton, R.id.threebutton, R.id.fourbutton, R.id.fivebutton, R.id.sixbutton, R.id.sevenbutton, R.id.eightbutton, R.id.ninebutton, R.id.zerobutton, R.id.slashbutton, R.id.multipbutton, R.id.minusbutton, R.id.plusbutton, R.id.pointbutton)
+        val calculatorButtons = arrayOf(R.id.onebutton, R.id.twobutton, R.id.threebutton, R.id.fourbutton, R.id.fivebutton, R.id.sixbutton, R.id.sevenbutton, R.id.eightbutton, R.id.ninebutton, R.id.zerobutton, R.id.slashbutton, R.id.multipbutton, R.id.minusbutton, R.id.plusbutton, R.id.pointbutton, R.id.percentbutton)
 
         for(i in calculatorButtons) {
             var button = findViewById<Button>(i)
@@ -139,8 +170,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Other buttons
-        val equalbutton = findViewById<Button>(R.id.equalbutton)
-        equalbutton.setOnClickListener(View.OnClickListener {
+        val equalsbutton = findViewById<Button>(R.id.equalsbutton)
+        equalsbutton.setOnClickListener(View.OnClickListener {
             getResults(resultscreen)
         })
 

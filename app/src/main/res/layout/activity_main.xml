@@ -73,8 +73,8 @@
 
     <Button
         style="@style/lightbutton_style"
-        android:id="@+id/backbutton"
-        android:text="◁"
+        android:id="@+id/percentbutton"
+        android:text="%"
         />
 
     <Button
@@ -120,9 +120,9 @@
         />
 
     <Button
-        style="@style/calculatebutton_style"
-        android:id="@+id/equalbutton"
-        android:text="="
+        style="@style/lightbutton_style"
+        android:id="@+id/backbutton"
+        android:text="◁"
         />
 
     <Button
@@ -136,5 +136,11 @@
         style="@style/lightbutton_style"
         android:id="@+id/pointbutton"
         android:text="."
+        />
+
+    <Button
+        style="@style/equalsbutton_style"
+        android:id="@+id/equalsbutton"
+        android:text="="
         />
 </GridLayout>
