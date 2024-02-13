@@ -6,14 +6,18 @@ Created and built with Kotlin in Android Studio 2023.1.1
 
 Minimum Android version is 10.0 (SDK 29).
 
-## Percentage calculations
+## Percentage
 
-Percentage calculations are supported from version 1.3 onwards. Examples:
+Percentage calculations can be used with all other operators. Examples:
 
 ```
 10 - 20% = 8
 ```
 
+## Remainder
+
+Example of returning remainder:
+
 ```
-40 x 5% = 80
+10 % 3 = 1
 ```
