@@ -92,7 +92,6 @@ class MainActivity : AppCompatActivity() {
             try {
                 //Percent equations
                 if(str.last().toString() == "%") {
-
                     val percentOperator = when {
                         str.contains("+") -> "+"
                         str.contains("-") -> "-"
@@ -114,6 +113,13 @@ class MainActivity : AppCompatActivity() {
                         "*" -> firstNumber.toDouble() * percentResult
                         else -> throw IllegalArgumentException("Invalid operator")
                     }
+                }
+
+                //Calculate remainder
+                else if(str.contains("%")) {
+                    val firstNumber = str.substringBefore("%")
+                    val secondNumber = str.substringAfter("%", "")
+                    result = firstNumber.toDouble() % secondNumber.toDouble()
                 }
 
                 //Normal equations
