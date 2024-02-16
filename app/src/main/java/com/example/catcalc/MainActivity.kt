@@ -38,36 +38,42 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    fun addSymbol(resultscreen: TextView, operator: String) {
+    fun addSymbol(resultscreen: TextView, input: String) {
 
         if(errorOnScreen) {
             resultscreen.text = ""
             errorOnScreen = false
+            Toast.makeText(this, "1", Toast.LENGTH_SHORT).show()
         }
 
         //If field is empty
         if(resultscreen.text == "") {
-            if(operator == "÷" || operator == "x" || operator == "+" || operator == "%") {
+            if(input == "÷" || input == "x" || input == "+" || input == "%") {
                 resultscreen.text = ""
+                Toast.makeText(this, "2", Toast.LENGTH_SHORT).show()
             }
             else {
-                resultscreen.text = operator
+                resultscreen.text = input
+                Toast.makeText(this, "3", Toast.LENGTH_SHORT).show()
             }
         }
 
         //If field has previous result
         else if(resultsOnScreen && resultscreen.text != "") {
-            if(operator != "÷"  && operator != "x" && operator != "+" && operator != "-" && operator != "%") {
-                resultscreen.text = operator
+            if(input != "÷"  && input != "x" && input != "+" && input != "-" && input != "%") {
+                resultscreen.text = input
+                Toast.makeText(this, "4", Toast.LENGTH_SHORT).show()
             }
             else {
-                resultscreen.text = resultscreen.text.toString() + operator
+                resultscreen.text = resultscreen.text.toString() + input
+                Toast.makeText(this, "5", Toast.LENGTH_SHORT).show()
             }
         }
 
         //Continue writing equation
         else {
-            resultscreen.text = resultscreen.text.toString() + operator
+            resultscreen.text = resultscreen.text.toString() + input
+            Toast.makeText(this, "6", Toast.LENGTH_SHORT).show()
         }
 
         if(resultsOnScreen) {
@@ -166,7 +172,23 @@ class MainActivity : AppCompatActivity() {
         resultscreen.text = ""
 
         //Number and operator buttons
-        val calculatorButtons = arrayOf(R.id.onebutton, R.id.twobutton, R.id.threebutton, R.id.fourbutton, R.id.fivebutton, R.id.sixbutton, R.id.sevenbutton, R.id.eightbutton, R.id.ninebutton, R.id.zerobutton, R.id.slashbutton, R.id.multipbutton, R.id.minusbutton, R.id.plusbutton, R.id.pointbutton, R.id.percentbutton)
+        val calculatorButtons = arrayOf(
+            R.id.onebutton,
+            R.id.twobutton,
+            R.id.threebutton,
+            R.id.fourbutton,
+            R.id.fivebutton,
+            R.id.sixbutton,
+            R.id.sevenbutton,
+            R.id.eightbutton,
+            R.id.ninebutton,
+            R.id.zerobutton,
+            R.id.slashbutton,
+            R.id.multipbutton,
+            R.id.minusbutton,
+            R.id.plusbutton,
+            R.id.pointbutton,
+            R.id.percentbutton)
 
         for(i in calculatorButtons) {
             var button = findViewById<Button>(i)
