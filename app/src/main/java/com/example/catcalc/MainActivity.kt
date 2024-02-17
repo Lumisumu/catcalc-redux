@@ -36,8 +36,9 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun addSymbol(resultscreen: TextView, input: String) {
+        //If error is shown, clear
         if(errorOnScreen) {
-            resultscreen.text = ""
+            resultscreen.text = input
             errorOnScreen = false
         }
         else {
@@ -64,37 +65,39 @@ class MainActivity : AppCompatActivity() {
             str = str.replace("x", "*")
             str = str.replace("÷", "/")
 
+            //Percent symbol calculations
             try {
-                //Percent equations
-                if(str.last().toString() == "%") {
-                    val percentOperator = when {
-                        str.contains("+") -> "+"
-                        str.contains("-") -> "-"
-                        str.contains("/") -> "/"
-                        str.contains("*") -> "*"
-                        else -> throw IllegalArgumentException("Invalid operator")
+                //Percentage calculations
+                if(str.contains("%")) {
+                    if(str.last().toString() == "%") {
+                        val percentOperator = when {
+                            str.contains("+") -> "+"
+                            str.contains("-") -> "-"
+                            str.contains("/") -> "/"
+                            str.contains("*") -> "*"
+                            else -> throw IllegalArgumentException("Invalid operator")
+                        }
+
+                        val firstNumber = str.substringBefore(percentOperator)
+                        val secondNumber = str.substringAfter(percentOperator, "").removeSuffix("%")
+
+                        var percent = firstNumber.toDouble() / 100
+                        var percentResult = percent * secondNumber.toDouble()
+
+                        result = when (percentOperator) {
+                            "+" -> firstNumber.toDouble() + percentResult
+                            "-" -> firstNumber.toDouble() - percentResult
+                            "/" -> firstNumber.toDouble() / percentResult
+                            "*" -> firstNumber.toDouble() * percentResult
+                            else -> throw IllegalArgumentException("Invalid operator")
+                        }
                     }
-
-                    val firstNumber = str.substringBefore(percentOperator)
-                    val secondNumber = str.substringAfter(percentOperator, "").removeSuffix("%")
-
-                    var percent = firstNumber.toDouble() / 100
-                    var percentResult = percent * secondNumber.toDouble()
-
-                    result = when (percentOperator) {
-                        "+" -> firstNumber.toDouble() + percentResult
-                        "-" -> firstNumber.toDouble() - percentResult
-                        "/" -> firstNumber.toDouble() / percentResult
-                        "*" -> firstNumber.toDouble() * percentResult
-                        else -> throw IllegalArgumentException("Invalid operator")
+                    //Calculate remainder
+                    else {
+                        val firstNumber = str.substringBefore("%")
+                        val secondNumber = str.substringAfter("%", "")
+                        result = firstNumber.toDouble() % secondNumber.toDouble()
                     }
-                }
-
-                //Calculate remainder
-                else if(str.contains("%")) {
-                    val firstNumber = str.substringBefore("%")
-                    val secondNumber = str.substringAfter("%", "")
-                    result = firstNumber.toDouble() % secondNumber.toDouble()
                 }
 
                 //Normal equations
@@ -124,7 +127,6 @@ class MainActivity : AppCompatActivity() {
                 resultsOnScreen = true
 
             } catch (e: Exception) {
-                Toast.makeText(this, "Check equation for mistakes", Toast.LENGTH_LONG).show()
                 resultscreen.text = "Cannot calculate: " + str
                 errorOnScreen = true
             }
