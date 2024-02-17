@@ -13,24 +13,21 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    //Flag to mark if textview has a result
     private var resultsOnScreen = true
-    //Flag to mark if textview has an error message
     private var errorOnScreen = false
 
+    //Back (arrow) button to remove last typed symbol
     private fun removeLastChar(resultscreen: TextView) {
-        if(errorOnScreen) {
-            resultscreen.text = ""
-        }
-        else if(resultsOnScreen) {
-            resultscreen.text = ""
+        if(!errorOnScreen && !resultsOnScreen) {
+            resultscreen.text = resultscreen.text.dropLast(1)
         }
         else {
-            resultscreen.text = resultscreen.text.dropLast(1)
+            resultscreen.text = ""
         }
         resultsOnScreen = false
     }
 
+    //Clear (C) button to reset textview
     private fun clearResultScreen(resultscreen: TextView) {
         resultscreen.text = ""
         resultsOnScreen = false
@@ -39,46 +36,18 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     fun addSymbol(resultscreen: TextView, input: String) {
-
         if(errorOnScreen) {
             resultscreen.text = ""
             errorOnScreen = false
-            Toast.makeText(this, "1", Toast.LENGTH_SHORT).show()
         }
-
-        //If field is empty
-        if(resultscreen.text == "") {
-            if(input == "÷" || input == "x" || input == "+" || input == "%") {
-                resultscreen.text = ""
-                Toast.makeText(this, "2", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                resultscreen.text = input
-                Toast.makeText(this, "3", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        //If field has previous result
-        else if(resultsOnScreen && resultscreen.text != "") {
-            if(input != "÷"  && input != "x" && input != "+" && input != "-" && input != "%") {
-                resultscreen.text = input
-                Toast.makeText(this, "4", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                resultscreen.text = resultscreen.text.toString() + input
-                Toast.makeText(this, "5", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        //Continue writing equation
         else {
-            resultscreen.text = resultscreen.text.toString() + input
-            Toast.makeText(this, "6", Toast.LENGTH_SHORT).show()
+            when {
+                resultscreen.text == "" -> resultscreen.text = if (input in setOf("÷", "x", "+", "%")) "" else input
+                resultsOnScreen && resultscreen.text != "" -> resultscreen.text = if (input in setOf("÷", "x", "+", "-", "%")) resultscreen.text.toString() + input else input
+                else -> resultscreen.text = resultscreen.text.toString() + input
+            }
         }
-
-        if(resultsOnScreen) {
-            resultsOnScreen = false
-        }
+        resultsOnScreen = false
     }
 
     //When equals button is pressed
