@@ -94,9 +94,16 @@ class MainActivity : AppCompatActivity() {
                     }
                     //Calculate remainder
                     else {
-                        val firstNumber = str.substringBefore("%")
-                        val secondNumber = str.substringAfter("%", "")
-                        result = firstNumber.toDouble() % secondNumber.toDouble()
+                        //When calculating remainder, other operators cannot be used
+                        if (str.contains("%") && (str.contains("+") || str.contains("-") || str.contains("*") || str.contains("/"))) {
+                            showErrorMessage(resultscreen, str)
+                            errorOnScreen = true
+                        }
+                        else {
+                            val firstNumber = str.substringBefore("%")
+                            val secondNumber = str.substringAfter("%", "")
+                            result = firstNumber.toDouble() % secondNumber.toDouble()
+                        }
                     }
                 }
 
@@ -127,10 +134,15 @@ class MainActivity : AppCompatActivity() {
                 resultsOnScreen = true
 
             } catch (e: Exception) {
-                resultscreen.text = "Cannot calculate: " + str
-                errorOnScreen = true
+                showErrorMessage(resultscreen, str)
             }
         }
+    }
+
+    //Show error
+    fun showErrorMessage(resultscreen: TextView, str: String) {
+        resultscreen.text = "Cannot calculate: " + str
+        errorOnScreen = true
     }
 
     //When application starts
