@@ -140,7 +140,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Show error
-    fun showErrorMessage(resultscreen: TextView, str: String) {
+    fun showErrorMessage(resultscreen: TextView, string: String) {
+        var str = string
+        str = str.replace("*", "x")
+        str = str.replace("/", "÷")
         resultscreen.text = "Cannot calculate: " + str
         errorOnScreen = true
     }
