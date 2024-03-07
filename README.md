@@ -8,7 +8,7 @@ Minimum Android version is 10.0 (SDK 29).
 
 ## Percentage
 
-Percentage calculations can be used with all other operators. Examples:
+Example of percentage calculations:
 
 ```
 10 - 20% = 8

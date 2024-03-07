@@ -31,26 +31,21 @@
 
     <Button
         style="@style/lightbutton_style"
+        android:id="@+id/clearbutton"
+        android:text="C"
+        android:layout_columnSpan="2"
+        />
+
+    <Button
+        style="@style/lightbutton_style"
+        android:id="@+id/percentbutton"
+        android:text="%"
+        />
+
+    <Button
+        style="@style/lightbutton_style"
         android:id="@+id/slashbutton"
         android:text="÷"
-        />
-
-    <Button
-        style="@style/lightbutton_style"
-        android:id="@+id/multipbutton"
-        android:text="x"
-        />
-
-    <Button
-        style="@style/lightbutton_style"
-        android:id="@+id/minusbutton"
-        android:text="-"
-        />
-
-    <Button
-        style="@style/lightbutton_style"
-        android:id="@+id/plusbutton"
-        android:text="+"
         />
 
     <Button
@@ -73,8 +68,8 @@
 
     <Button
         style="@style/lightbutton_style"
-        android:id="@+id/percentbutton"
-        android:text="%"
+        android:id="@+id/multipbutton"
+        android:text="x"
         />
 
     <Button
@@ -97,8 +92,8 @@
 
     <Button
         style="@style/lightbutton_style"
-        android:id="@+id/clearbutton"
-        android:text="C"
+        android:id="@+id/minusbutton"
+        android:text="-"
         />
 
     <Button
@@ -121,6 +116,12 @@
 
     <Button
         style="@style/lightbutton_style"
+        android:id="@+id/plusbutton"
+        android:text="+"
+        />
+
+    <Button
+        style="@style/lightbutton_style"
         android:id="@+id/backbutton"
         android:text="◁"
         />
@@ -129,7 +130,6 @@
         style="@style/lightbutton_style"
         android:id="@+id/zerobutton"
         android:text="0"
-        android:layout_columnSpan="2"
         />
 
     <Button
@@ -142,5 +142,6 @@
         style="@style/equalsbutton_style"
         android:id="@+id/equalsbutton"
         android:text="="
+        android:layout_columnSpan="1"
         />
 </GridLayout>
