@@ -9,7 +9,7 @@
     >
 
     <FrameLayout
-        android:layout_height="185dp"
+        android:layout_height="220dp"
         android:layout_columnSpan="4">
 
         <ImageView
@@ -23,10 +23,15 @@
         <TextView
             android:id="@+id/resultscreen"
             style="@style/inputview_style"
-            android:layout_width="343dp"
-            android:layout_height="168dp"
+            android:layout_width="374dp"
+            android:layout_height="203dp"
             android:layout_gravity="right"
-            android:layout_margin="10dp" />
+            android:layout_margin="10dp"
+            android:autoSizeMaxTextSize="70sp"
+            android:autoSizeMinTextSize="30sp"
+            android:autoSizeStepGranularity="2sp"
+            android:autoSizeTextType="uniform"
+            android:maxLines="5" />
     </FrameLayout>
 
     <Button
