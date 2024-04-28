@@ -6,7 +6,7 @@ Created and built with Kotlin in Android Studio 2023.2.1. Minimum Android versio
 
 ## Installation
 
-Download the apk from Releases and transfer it to your Android device. Locate the file with a file browser app and click it to install. You may need to give app install permission to the file browser you are using.
+Download the apk from Releases and transfer it to your Android device. Locate the file with a file browser app and click it to install. You may need to give the file browser app installation permissions to complete the install.
 
 ## Features
 
