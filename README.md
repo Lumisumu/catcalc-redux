@@ -8,7 +8,7 @@ Created and built with Kotlin in Android Studio 2023.2.1. Minimum Android versio
 
 Download the apk from Releases and transfer it to your Android device. Locate the file with a file browser app and click it to install. You may need to give app install permission to the file browser you are using.
 
-## Layout and Features
+## Features
 
 "⤺" button: remove last character in text field.
 
