@@ -39,7 +39,13 @@
         style="@style/lightbutton_style"
         android:id="@+id/clearbutton"
         android:text="C"
-        android:layout_columnSpan="2"
+        />
+
+    <Button
+        style="@style/lightbutton_style"
+        android:id="@+id/historybutton"
+        android:text="⏲↩"
+        android:textSize="30sp"
         />
 
     <Button
@@ -129,7 +135,7 @@
     <Button
         style="@style/lightbutton_style"
         android:id="@+id/backbutton"
-        android:text="◁"
+        android:text="⤺"
         />
 
     <Button

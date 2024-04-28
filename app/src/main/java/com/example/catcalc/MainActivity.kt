@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     private var resultsOnScreen = true
     private var errorOnScreen = false
+    private var lastResult = ""
 
     //Back (arrow) button to remove last typed symbol
     private fun removeLastChar(resultscreen: TextView) {
@@ -32,6 +33,11 @@ class MainActivity : AppCompatActivity() {
         resultscreen.text = ""
         resultsOnScreen = false
         errorOnScreen = false
+    }
+
+    //Restore previous result to textview
+    private fun restoreResultScreen(resultscreen: TextView) {
+        resultscreen.text = lastResult
     }
 
     @SuppressLint("SetTextI18n")
@@ -131,6 +137,7 @@ class MainActivity : AppCompatActivity() {
 
                 //Show result on screen
                 resultscreen.text = editedResult
+                lastResult = editedResult
                 resultsOnScreen = true
 
             } catch (e: Exception) {
@@ -197,6 +204,11 @@ class MainActivity : AppCompatActivity() {
         val clearbutton = findViewById<Button>(R.id.clearbutton)
         clearbutton.setOnClickListener(View.OnClickListener {
             clearResultScreen(resultscreen)
+        })
+
+        val historybutton = findViewById<Button>(R.id.historybutton)
+        historybutton.setOnClickListener(View.OnClickListener {
+           restoreResultScreen(resultscreen)
         })
     }
 }
