@@ -4,7 +4,7 @@ My first Android Project, CatCalc from 2020, is now updated and rewritten for ne
 
 ## User installation
 
-Download the apk from Releases and transfer it to your Android device. Locate the file with a file browser app and click it to install. You may need to give the file browser app installation permissions to complete the install.
+Download the project, compile it to an apk and transfer it to your Android device. Locate the file with a file browser app and click it to install. You may need to give the file browser app installation permissions to complete the install.
 
 Minimum Android version: 10.0
 
